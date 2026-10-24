@@ -1,0 +1,4 @@
+# Optional direct client only; the Skill and budget_report.py need no packages.
+mcp==2.3.0
+httpx2==2.16.0
+jsonschema==4.26.0

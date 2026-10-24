@@ -1,0 +1,4 @@
+interface:
+  display_name: "麦麦预算核价助手"
+  short_description: "根据真实门店菜单和官方计价，比较预算内的多人点餐方案"
+  default_prompt: "使用 $mcd-budget-check，为两个人按总预算规划麦当劳餐品并核对真实价格。"
