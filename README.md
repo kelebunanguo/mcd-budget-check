@@ -2,7 +2,20 @@
 
 说清人数、预算、地点和口味，获得经麦当劳官方 MCP 实时计价的点餐方案。适合想控制一顿饭支出、又不想逐项研究菜单的个人与小组。
 
-这是**对话 Skill**：由支持 `SKILL.md` 的 AI 客户端完成需求确认、实时查询、候选构建与解释。Python 脚本提供可选的只读直连及确定性核算，不是一个独立的自然语言聊天网站。首版支持到店自取和麦乐送已有地址，流程止于报价，由用户在官方渠道自行下单。
+**[在线试玩 →](https://mcd-budget-check-demo.silkypony128.chatgpt.site)** · [真实核价记录](DEMO.md) · [安装 Skill](#使用)
+
+![预算核价助手网页：原创餐品拼贴与预算试玩入口](assets/web-desktop.png)
+
+网页无需登录或 Token，可设置 1—6 人、总预算、口味、无糖饮料和薯条偏好，比较三套**虚构模拟方案**，查看人均、预算余量及可复制的小票。网页另展示已完成的真实 MCP **历史**核价记录；实时门店、菜单和官方价格仍由本机 Skill 查询。
+
+<details>
+<summary>查看手机效果</summary>
+
+<img src="assets/web-mobile.png" width="375" alt="375 像素手机浏览器中的预算核价助手页面">
+
+</details>
+
+核心是**对话 Skill**：由支持 `SKILL.md` 的 AI 客户端完成需求确认、实时查询、候选构建与解释。Python 脚本提供可选的只读直连及确定性核算。网页是独立的展示试玩入口，不是实时聊天或下单网站。Skill 支持到店自取和麦乐送已有地址，流程止于报价，由用户在官方渠道自行下单。
 
 ## 使用
 
@@ -61,6 +74,17 @@ python3 -m unittest discover -s tests -v
 ```
 
 [VALIDATION.md](VALIDATION.md) 记录已执行的真实链路、测试结果和未验证项。已成功的历史报价仅用于展示验证经过，不代表之后的实时价格。模拟单元测试与真实 MCP 联调分别记录。
+
+## 网页演示开发
+
+静态源码在 `docs/`，HTML/CSS/JavaScript 无第三方运行依赖，不收集 Token，不发起实时 MCP 请求。所有演示金额使用整数分计算；偏好、预算不足和升级超预算均在浏览器本地处理。
+
+```bash
+python3 -m http.server 8767 --directory docs
+node --test tests/test_web.mjs
+```
+
+本地打开 `http://localhost:8767`。前端逻辑测试只需 Node.js 18+；试玩本身不需要 Node.js 或 Python。[插画提示词与素材说明](assets/image-prompt.md)随项目提供；README 中的桌面和手机图片来自实际浏览器截图。
 
 ## 参赛材料
 

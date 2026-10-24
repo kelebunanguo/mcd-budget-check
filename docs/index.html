@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f7f1e7">
+  <title>麦麦预算核价助手｜这一餐，花得明白。</title>
+  <meta name="description" content="先定预算，再开饭。无需 Token，试玩人数、预算与点餐方案比较；查看真实麦当劳 MCP 历史核价记录，安装预算点餐 Skill。">
+  <meta property="og:title" content="麦麦预算核价助手｜这一餐，花得明白。">
+  <meta property="og:description" content="几个人吃、想花多少，摆出几套方案，比一比再决定。无需 Token 的互动演示。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://mcd-budget-check-demo.silkypony128.chatgpt.site/assets/meal-collage.jpg">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.mjs"></script>
+</head>
+<body>
+  <a class="skip-link" href="#play">跳到预算试玩</a>
+  <header class="header wrap">
+    <a class="brand" href="#" aria-label="麦麦预算核价助手首页">
+      <span class="brand-icon" aria-hidden="true">¥</span>
+      <span><strong>麦麦预算核价助手</strong><small>MCD BUDGET CHECK</small></span>
+    </a>
+    <nav aria-label="主导航">
+      <a href="#play">预算试玩</a>
+      <a href="#proof">真实核价</a>
+      <a href="#install">安装 Skill</a>
+      <a class="github-link" href="https://github.com/kelebunanguo/mcd-budget-check" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">☆</span> GitHub <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="red-dot"></span> 先定预算，再开饭。</p>
+        <h1 id="hero-title">这一餐，<br><em>花得明白。</em></h1>
+        <p class="hero-intro">几个人吃、想花多少，<br>摆出几套方案，比一比再决定。</p>
+        <div class="hero-actions"><a class="button button-red" href="#play">算算这一餐 <span aria-hidden="true">↘</span></a><a class="text-link" href="#proof">看真实核价记录 <span aria-hidden="true">↗</span></a></div>
+        <p class="hero-note"><span aria-hidden="true">✳</span> 无需登录 · 无需 Token · 先试玩，再安装</p>
+      </div>
+      <div class="hero-art">
+        <img src="assets/meal-collage.jpg" width="1400" height="1050" alt="原创餐品视觉示意：汉堡、薯条、饮料和预算计算器的纸艺拼贴" fetchpriority="high">
+        <div class="budget-stamp"><span>今天的演示预算</span><strong><small>¥</small>50<span>.00</span></strong><span>2 人，也能安排明白</span></div>
+        <span class="art-caption">原创 AI 插画 · 餐品视觉示意</span>
+      </div>
+    </section>
+
+    <div class="ribbon" aria-label="点餐规划流程"><div class="wrap"><span>预算先说好</span><i aria-hidden="true">✳</i><span>几套方案摆出来</span><i aria-hidden="true">✳</i><span>余量算到分</span><i aria-hidden="true">✳</i><span>这一餐，心里有数</span></div></div>
+
+    <section class="play-section" id="play" aria-labelledby="play-title">
+      <div class="wrap">
+        <div class="section-heading"><div><p class="eyebrow">01 / YOUR MEAL, YOUR BUDGET</p><h2 id="play-title">今天，打算花多少？</h2></div><span class="demo-label">模拟试玩 · 非实时菜单与价格</span></div>
+        <p class="section-intro">先选人数和总预算。每人至少一份主食、一杯饮料，小食按方案搭配。</p>
+        <form id="budget-form" class="budget-form" novalidate>
+          <div class="input-row">
+            <div class="field"><label for="people">几个人吃</label><div class="stepper"><button type="button" id="people-less" aria-label="减少一人">−</button><input id="people" name="people" type="number" min="1" max="6" step="1" value="2" inputmode="numeric" aria-describedby="people-help"><button type="button" id="people-more" aria-label="增加一人">+</button><span>人</span></div><small id="people-help">支持 1—6 人演示</small></div>
+            <div class="field budget-field"><label for="budget">这一餐的总预算</label><div class="money-input"><span aria-hidden="true">¥</span><input id="budget" name="budget" type="text" value="50.00" inputmode="decimal" maxlength="7" aria-describedby="budget-help"></div><div class="presets" id="budget-help"><span>试试</span><button type="button" data-budget="30">¥30</button><button type="button" data-budget="50" aria-pressed="true">¥50</button><button type="button" data-budget="80">¥80</button><button type="button" data-budget="100">¥100</button></div></div>
+            <div class="field flavor-field"><label for="flavor">口味偏好</label><select id="flavor" name="flavor"><option value="any">都可以，随方案搭配</option><option value="mild">不吃辣</option></select><small>口味标注也为模拟设定</small></div>
+            <button type="submit" class="button button-ink calculate-button">比较方案 <span aria-hidden="true">↗</span></button>
+          </div>
+          <div class="preference-row"><div class="checks"><label><input type="checkbox" id="sugar-free" checked> 饮料选无糖</label><label><input type="checkbox" id="fries-all"> 每人都要薯条</label><label><input type="checkbox" id="large-fries"> 已有薯条换大份</label></div><span class="pickup-note">到店自取演示</span></div>
+          <p id="form-error" class="form-error" role="alert" hidden></p>
+        </form>
+
+        <div class="comparison-layout">
+          <div class="plan-area">
+            <div class="result-heading"><h3 id="result-title">你的预算方案</h3><span id="result-count" aria-live="polite"></span></div>
+            <p id="result-context" class="result-context"></p>
+            <div id="no-results" class="no-results" hidden><strong>这几套，暂时都超预算了。</strong><p id="no-results-message"></p><button type="button" id="use-minimum" class="text-link">按最低可行预算再算 <span aria-hidden="true">↗</span></button></div>
+            <div id="plan-cards" class="plan-cards" aria-label="三套模拟方案"></div>
+            <div class="play-hint"><span aria-hidden="true">↳</span><p>点一套方案，看看这一餐的小票。<br><span>想试试预算边界？</span> <button type="button" id="try-upgrade">把双人薯条升级为大份 →</button></p></div>
+            <p class="simulation-note">这里的餐品名称、价格和搭配均为虚构演示，仅比较这三套方案；不代表真实供应或全菜单最低价。真实报价请在 Skill 中连接自己的麦当劳 MCP。</p>
+          </div>
+
+          <aside class="receipt" id="receipt" aria-labelledby="receipt-title" aria-live="polite" aria-atomic="true">
+            <div class="receipt-brand"><span>麦麦预算核价助手</span><span aria-hidden="true">✳</span></div>
+            <p class="receipt-kicker">DEMO RECEIPT / 模拟餐单</p>
+            <h3 id="receipt-title">省一点</h3>
+            <p id="receipt-context" class="receipt-context"></p>
+            <ul id="receipt-items" class="receipt-items"></ul>
+            <div class="receipt-total"><span>模拟总价</span><strong id="receipt-total"></strong></div>
+            <div class="receipt-meta"><span>人均（四舍五入）</span><strong id="receipt-person"></strong></div>
+            <div class="remaining-box" id="remaining-box"><div><span id="remaining-label">预算还剩</span><strong id="receipt-remaining"></strong></div><div class="budget-track" aria-hidden="true"><span id="budget-fill"></span></div><p id="budget-caption"></p></div>
+            <button type="button" id="copy-receipt" class="copy-button">复制这份模拟餐单 <span aria-hidden="true">⧉</span></button>
+            <p class="receipt-footnote">纯模拟 · 无需 Token<br>所列价格含全部演示餐品，不含外送场景。</p>
+            <div class="receipt-barcode" aria-hidden="true"></div>
+            <a class="receipt-back" href="#result-title">← 回到方案比较</a>
+          </aside>
+        </div>
+        <p class="copy-status" id="copy-status" role="status"></p>
+        <noscript><p class="no-results">互动试玩需要启用 JavaScript。你仍可阅读下方的真实核价记录和安装说明。</p></noscript>
+      </div>
+    </section>
+
+    <section class="proof-section wrap" id="proof" aria-labelledby="proof-title">
+      <div class="proof-copy"><p class="eyebrow">02 / CHECKED WITH OFFICIAL MCP</p><h2 id="proof-title">模拟能试玩。<br>真实，也核过。</h2><p>同样是 2 人、50 元总预算，<br>真实门店里，已经跑过一次完整比较。</p><div class="proof-location"><span class="red-dot"></span><div><strong>上海人民广场附近 · 到店自取</strong><span>麦当劳上海黄浦华旭国际大厦餐厅</span><small>2026-10-24 11:45:42 历史核价</small></div></div><a class="text-link" href="https://github.com/kelebunanguo/mcd-budget-check/blob/main/DEMO.md" target="_blank" rel="noopener noreferrer">查看完整餐品与验证记录 <span aria-hidden="true">↗</span></a></div>
+      <div class="proof-ledger">
+        <div class="ledger-top"><span>官方 MCP 历史报价</span><span>总预算 ¥50.00</span></div>
+        <details class="proof-row"><summary><div><span class="proof-number">01</span><strong>主食 + 无糖饮料</strong><small>预算余量 ¥22.20</small></div><strong class="proof-price"><small>¥</small>27.80<span aria-hidden="true">＋</span></strong></summary><p>精选超值随心配 ×2：每人高达吉士双牛堡＋无糖可口可乐中杯。当次无券报价，人均 ¥13.90。</p><div class="proof-track"><span style="width:55.6%"></span></div></details>
+        <details class="proof-row"><summary><div><span class="proof-number">02</span><strong>每人再加一份中薯</strong><small>预算余量 ¥4.20</small></div><strong class="proof-price"><small>¥</small>45.80<span aria-hidden="true">＋</span></strong></summary><p>大堡口福三件套 ×2：每人 Hold不住鸡排堡（椒盐风味）＋中薯＋无糖可口可乐中杯。人均 ¥22.90。</p><div class="proof-track"><span style="width:91.6%"></span></div></details>
+        <details class="proof-row"><summary><div><span class="proof-number">03</span><strong>不同主食，小食共享</strong><small>预算余量 ¥0.10</small></div><strong class="proof-price"><small>¥</small>49.90<span aria-hidden="true">＋</span></strong></summary><p>麦麦周末双人餐：枫糖风味厚松饼猪柳蛋堡、麦辣鸡腿汉堡、两杯无糖可口可乐中杯，共享中薯和脆薯饼。人均 ¥24.95。</p><div class="proof-track"><span style="width:99.8%"></span></div></details>
+        <div class="proof-warning"><span aria-hidden="true">↳</span><p>第二套的两份中薯都升级为大薯后，<strong>¥50.80，超预算 ¥0.80。</strong><br><span>升级核价时间 11:46:48；应从预算内方案中排除。</span></p></div>
+        <p class="proof-note">以上为一次真实账户、门店和时段的历史结果，非当前报价承诺。网页不发起实时核价；使用 Skill 时须重新查询。</p>
+      </div>
+    </section>
+
+    <section class="install-section" id="install" aria-labelledby="install-title"><div class="wrap install-layout"><div class="install-copy"><p class="eyebrow">03 / TAKE IT INTO YOUR CHAT</p><h2 id="install-title">把真实核价，<br>带进你的对话。</h2><p>网页先体验，真实点餐交给 Skill。<br>连接你自己的 MCP，查门店、菜单与当次报价。</p><div class="install-actions"><a class="button button-butter" href="https://github.com/kelebunanguo/mcd-budget-check/archive/refs/heads/main.zip">下载 Skill <span aria-hidden="true">↓</span></a><a class="text-link" href="https://github.com/kelebunanguo/mcd-budget-check#使用" target="_blank" rel="noopener noreferrer">看安装说明 ↗</a></div><p class="install-note">支持加载 SKILL.md 的客户端 · 本机接入自己的 Token</p></div><div class="conversation"><div class="conversation-top"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>一次真实预算对话</span></div><ol class="install-steps"><li><span>01</span>下载整个项目，按客户端说明导入 Skill。</li><li><span>02</span>在客户端私有配置中连接麦当劳官方 MCP。</li><li><span>03</span>说清需求，先选门店，再比较报价。</li></ol><div class="prompt-box"><span class="prompt-label">可以这样问</span><p id="skill-prompt">使用 $mcd-budget-check，上海人民广场附近到店自取，2 人总预算 50 元，每人至少一份主食和一杯无糖饮料。请先让我选择门店，再比较几套真实报价。</p><button type="button" id="copy-prompt" class="copy-prompt" aria-label="复制 Skill 示例提问">复制提问 <span aria-hidden="true">⧉</span></button></div><p class="conversation-note">报价后由你在官方渠道自行下单。</p></div></div></section>
+  </main>
+
+  <footer class="footer wrap"><div><a class="footer-brand" href="#">麦麦预算核价助手 <span>mcd-budget-check</span></a><p>个人原创参赛项目，非麦当劳官方产品。网页使用模拟数据；真实结果以官方渠道当次返回为准。</p></div><div class="footer-links"><a href="https://github.com/kelebunanguo/mcd-budget-check" target="_blank" rel="noopener noreferrer">源码 / MIT ↗</a><a href="https://github.com/M-China/mcd-developer-innovation-challenge/issues/1199#issuecomment-6380124097" target="_blank" rel="noopener noreferrer">已确认参赛 ↗</a></div></footer>
+  <dialog id="copy-dialog"><form method="dialog"><button class="dialog-close" aria-label="关闭复制内容">×</button><h2>请手动复制</h2><p>浏览器暂不支持自动复制，可选中下方文字复制。</p><textarea id="copy-fallback" aria-label="待复制内容" readonly rows="9"></textarea><button class="button button-ink">完成</button></form></dialog>
+</body>
+</html>
