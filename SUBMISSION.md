@@ -4,10 +4,17 @@
 项目仓库：https://github.com/kelebunanguo/mcd-budget-check
 官方报名目的地：https://github.com/M-China/mcd-developer-innovation-challenge/issues
 
-状态：公开仓库已发布，报名已提交，等待官方系统回复。
+状态：公开仓库已发布，官方已确认成功参赛。
 
 报名 Issue：https://github.com/M-China/mcd-developer-innovation-challenge/issues/1199
 提交时间：2026-10-24 12:04:53（北京时间）。
+
+官方确认时间：2026-10-24 12:59:21（北京时间）。
+官方回复：[M-China-Official（COLLABORATOR）](https://github.com/M-China/mcd-developer-innovation-challenge/issues/1199#issuecomment-6380124097)。
+
+> 您的作品已成功参赛，您可以通过官方项目的排行榜.md查看排名
+
+排行榜：https://github.com/M-China/mcd-developer-innovation-challenge/blob/main/RANKING.md
 
 报名标题：〖参赛申请〗麦麦预算核价助手
 
